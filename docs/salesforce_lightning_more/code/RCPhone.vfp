@@ -31,16 +31,11 @@
         function receiveMessage(event) {
             // Inbound Screen-Pop
             if (event.data.type === 'rc-call-ring-notify') { // Inbound Screen Pop
-                console.log('RCDEMO == Event Received: rc-call-ring-notify');
                 sforce.opencti.setSoftphonePanelVisibility({
                     visible: true
                 });
                 var fromNumberE164 = event.data.call.from;
-                var fromNumber = phoneUtils.formatNational(fromNumberE164, "us");
-                if (fromNumber[0] === '+') {
-                    fromNumber = fromNumber.substring(1);
-                }
-                
+                var fromNumber = phoneUtils.formatNational(fromNumberE164, "us");                
                 sforce.opencti.runApex({
                     apexClass: 'RCPhoneHelper',
                     methodName: 'searchContact',
@@ -54,7 +49,7 @@
                                     params: { recordId: contact.Id }
                                 });
                                 //window.open('https://www.google.com/search?q=' + contact.Name);
-                                //window.open('https://www.linkedin.com/search/results/index/?keywords=' + contact.Name);
+                                //window.open('https://www.linkedin.com/search/results/people/?keywords=' + contact.Name);
                             }
                         }
                     }
@@ -63,13 +58,9 @@
             // Automatic Call Logging
             } else if (event.data.type === 'rc-call-end-notify') { // Call Logging
                 console.log('RCDEMO == Event Received: rc-call-end-notify');
-                console.log(JSON.stringify(event.data));
                 if (event.data.call.startTime !== null) {
                     var fromNumberE164 = event.data.call.from;
                     var fromNumber = phoneUtils.formatNational(fromNumberE164, "us");
-                    if (fromNumber[0] === '+') {
-                        fromNumber = fromNumber.substring(1);
-                    }
                     sforce.opencti.runApex({
                         apexClass: 'RCPhoneHelper',
                         methodName: 'searchContact',
@@ -90,8 +81,6 @@
                                             console.log(rr);
                                         }
                                     });
-                                } else {
-                                    console.log('RCDEMO == Contact Not Found: '+ fromNumberE164 + ' ' + fromNumber);
                                 }
                             }
                         }
