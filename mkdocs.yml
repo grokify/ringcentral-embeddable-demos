@@ -12,4 +12,5 @@ pages:
 - 'Static CRM Demo': 'static_crm/tutorial/index.md'
 - 'Salesforce Lightning Demo': 'salesforce_lightning/tutorial/index.md'
 - 'More Salesforce Lightning': 'salesforce_lightning_more/tutorial/index.md'
+- 'Salesforce Demo Account': 'salesforce_lightning/tutorial/demo_instance.md'
 - 'Java Desktop App Demo': 'java_desktop_app/tutorial/index.md'
